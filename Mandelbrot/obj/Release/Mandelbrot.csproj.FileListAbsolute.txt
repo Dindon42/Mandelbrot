@@ -1,0 +1,8 @@
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\bin\Release\Mandelbrot.exe.config
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\bin\Release\Mandelbrot.exe
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\bin\Release\Mandelbrot.pdb
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Release\Mandelbrot.Mandelbrot.resources
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Release\Mandelbrot.Properties.Resources.resources
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Release\Mandelbrot.csproj.GenerateResource.Cache
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Release\Mandelbrot.exe
+C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Release\Mandelbrot.pdb

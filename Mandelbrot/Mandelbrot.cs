@@ -14,21 +14,18 @@ namespace Mandelbrot
   public partial class Mandelbrot : Form
   {
     //Tunables
-    int StartColSegments = 4;
-    double ZoomFactor = 0.1;
     bool Grayscale = false;
-    bool RandomizeColors=false;
-
+    int ColSegments = 0;
+    double ZoomFactor = 0;
     
     Bitmap MyMandelbrot;
     ushort ImgWidth;
     ushort ImgHeight;
-    int ColSegments;
     //Starting values;
-    double MinX = -2.5;
-    double MaxX = 1;
-    double MinY = -1;
-    double MaxY = 1;
+    double MinX;
+    double MaxX;
+    double MinY;
+    double MaxY;
 
     XY[,] Coord;
 
@@ -40,8 +37,6 @@ namespace Mandelbrot
 
     public Mandelbrot()
     {
-      ColSegments = StartColSegments;
-      BuildColorList();
       Load += new EventHandler(Mandelbrot_Load);
       ResizeEnd += new EventHandler(Mandelbrot_Resize);
       
@@ -49,9 +44,36 @@ namespace Mandelbrot
       PB.MouseClick += new MouseEventHandler(PB_MouseClick);
     }
 
+    void ReInitializeParams()
+    {
+      MinX = -2.5;
+      MaxX = 1;
+      MinY = -1;
+      MaxY = 1;
+      iColSeg.Value = 3;
+      iZF.Value = 2;
+      iGrayScale.Checked = false;
+      SmartZoom.Checked = true;
+
+      UpdateParameters();
+      UpdateImage();
+    }
+
+    void UpdateParameters()
+    {
+      ColSegments = iColSeg.Value;
+      ZoomFactor = 0.05* iZF.Value;
+      Grayscale = iGrayScale.Checked;
+      ColSegLabel.Text = iColSeg.Value.ToString();
+      iZFLabel.Text = ZoomFactor.ToString();
+
+
+      BuildColorList();
+    }
+
     void Mandelbrot_Load(object sender, EventArgs e)
     {
-      UpdateImage();
+      ReInitializeParams();
     }
     void Mandelbrot_Resize(object sender, EventArgs e)
     {
@@ -62,21 +84,26 @@ namespace Mandelbrot
     {
       XY XY = Coord[e.X, e.Y];
       bool ZoomIn = false;
+      bool ZoomOut = false;
+
       switch (e.Button)
       {
         case MouseButtons.Right:
         {
-          if (ColSegments == StartColSegments) return;
           //Zoom Out
-          ColSegments--;
-          ZoomIn = false;
+          if(iColSeg.Value>iColSeg.Minimum && SmartZoom.Checked) iColSeg.Value--;
+          ZoomOut = true;
           break;
         }
         case MouseButtons.Left:
         {
           //Zoom In.
-          ColSegments++;
+          if (iColSeg.Value < iColSeg.Maximum && SmartZoom.Checked) iColSeg.Value++;
           ZoomIn = true;
+          break;
+        }
+        case MouseButtons.Middle:
+        {
           break;
         }
         default:
@@ -84,13 +111,12 @@ namespace Mandelbrot
           return;
         }
       }
-      if (ColSegments == 0) ColSegments = 1;
-      BuildColorList();
-      UpdateCanvas(XY, ZoomIn);
+      UpdateParameters();
+      UpdateCanvas(XY, ZoomIn, ZoomOut);
     }
-    void UpdateCanvas(XY NewCenter,bool ZoomIn)
+    void UpdateCanvas(XY NewCenter,bool ZoomIn, bool ZoomOut)
     {
-      double ZF = ZoomIn ? ZoomFactor : 1 / ZoomFactor;
+      double ZF = ZoomIn ? ZoomFactor : ZoomOut? 1 / ZoomFactor: 1;
 
       double NewHalfWidth = (MaxX - MinX) * ZF / 2;
       double NewHalfHeight = (MaxY - MinY) * ZF / 2;
@@ -180,22 +206,30 @@ namespace Mandelbrot
       return NewCoord;
     }
 
+    void RandomizeColors()
+    {
+      Colors.Shuffle();
+      UpdateImage();
+    }
+
     void BuildColorList()
     {
       Colors = new List<int[]>();
       int Max=255;
 
-      for (int i = 0; i < ColSegments; i++)
+      for (int i = 0; i <= ColSegments; i++)
       {
-        for (int j = 0; j < ColSegments; j++)
+        for (int j = 0; j <= ColSegments; j++)
         {
-          for (int k = 0; k < ColSegments; k++)
+          for (int k = 0; k <= ColSegments; k++)
           {
             int r = i * Convert.ToInt16((double)Max / (double)ColSegments);
-            int g;
-            int b;
+            int g = j * Convert.ToInt16((double)Max / (double)ColSegments);
+            int b = k * Convert.ToInt16((double)Max / (double)ColSegments);
+
             if (Grayscale)
             {
+              r = Convert.ToInt16((double)(r + g + b)/(double)3);
               g = r;
               b = r;
             }
@@ -204,14 +238,53 @@ namespace Mandelbrot
               g = j * Convert.ToInt16((double)Max / (double)ColSegments);
               b = k * Convert.ToInt16((double)Max / (double)ColSegments);
             }
-            
+            if (r > 255) r = 255;
+            if (g > 255) g = 255;
+            if (b > 255) b = 255;
+
 
             Colors.Add(new int[3] { r, g, b});
           }
         }
       }
-      if(RandomizeColors) Colors.Shuffle();
+      Colors = Colors.Select(x => x).Distinct().ToList();
       MaxIter = Colors.Count();
+    }
+
+    private void RandClick(object sender, EventArgs e)
+    {
+      RandomizeColors();
+    }
+
+    private void iColSeg_Scroll(object sender, EventArgs e)
+    {
+      UpdateParameters();
+    }
+
+    private void iZF_Scroll(object sender, EventArgs e)
+    {
+      UpdateParameters();
+    }
+
+    private void UpdImg_Click(object sender, EventArgs e)
+    {
+      UpdateImage();
+    }
+
+    private void iGrayScale_CheckedChanged(object sender, EventArgs e)
+    {
+      UpdateParameters();
+    }
+
+    private void NormColors(object sender, EventArgs e)
+    {
+      BuildColorList();
+      UpdateImage();
+    }
+
+    private void Reset_Click(object sender, EventArgs e)
+    {
+      ReInitializeParams();
     }
   }
 }

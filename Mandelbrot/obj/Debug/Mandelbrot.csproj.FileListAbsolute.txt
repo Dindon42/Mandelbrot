@@ -6,4 +6,3 @@ C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Debug\Mandelbro
 C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Debug\Mandelbrot.csproj.GenerateResource.Cache
 C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Debug\Mandelbrot.exe
 C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Debug\Mandelbrot.pdb
-C:\Users\labreche\Documents\Vincent\C#\Mandelbrot\Mandelbrot\obj\Debug\Mandelbrot.csprojResolveAssemblyReference.cache

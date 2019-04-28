@@ -14,7 +14,7 @@ namespace Mandelbrot
   public partial class Mandelbrot : Form
   {
     //Tunables
-    int StartColSegments = 3;
+    int StartColSegments = 4;
     double ZoomFactor = 0.1;
     bool Grayscale = false;
 
@@ -206,7 +206,7 @@ namespace Mandelbrot
             }
             
 
-            Colors.Add(new int[3] { r, g, b });
+            Colors.Add(new int[3] { r, g, b});
           }
         }
       }

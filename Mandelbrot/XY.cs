@@ -8,10 +8,10 @@ namespace Mandelbrot
 {
   public class XY
   {
-    public decimal X { get; set; }
-    public decimal Y { get; set; }
+    public double X { get; set; }
+    public double Y { get; set; }
 
-    public XY(decimal ix, decimal iy)
+    public XY(double ix, double iy)
     {
       X = ix;
       Y = iy;

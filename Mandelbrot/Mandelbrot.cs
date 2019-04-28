@@ -14,8 +14,8 @@ namespace Mandelbrot
   public partial class Mandelbrot : Form
   {
     //Tunables
-    int StartColSegments = 2;
-    decimal ZoomFactor = (decimal) 0.1;
+    int StartColSegments = 3;
+    double ZoomFactor = 0.1;
     bool Grayscale = false;
 
     
@@ -24,10 +24,10 @@ namespace Mandelbrot
     ushort ImgHeight;
     int ColSegments;
     //Starting values;
-    decimal MinX = (decimal) -2.5;
-    decimal MaxX = (decimal) 1;
-    decimal MinY = (decimal)-1;
-    decimal MaxY = (decimal) 1;
+    double MinX = -2.5;
+    double MaxX = 1;
+    double MinY = -1;
+    double MaxY = 1;
 
     XY[,] Coord;
 
@@ -89,10 +89,10 @@ namespace Mandelbrot
     }
     void UpdateCanvas(XY NewCenter,bool ZoomIn)
     {
-      decimal ZF=ZoomIn?ZoomFactor:1/ZoomFactor;
+      double ZF = ZoomIn ? ZoomFactor : 1 / ZoomFactor;
 
-      decimal NewHalfWidth = (MaxX - MinX) * ZF / 2;
-      decimal NewHalfHeight =(MaxY - MinY) * ZF / 2;
+      double NewHalfWidth = (MaxX - MinX) * ZF / 2;
+      double NewHalfHeight = (MaxY - MinY) * ZF / 2;
 
       MinX = NewCenter.X - NewHalfWidth;
       MaxX = NewCenter.X + NewHalfWidth;
@@ -144,15 +144,15 @@ namespace Mandelbrot
       int NumIters = 0;
       int MaxIters = MaxIter;
 
-      decimal x0=Coord.X;
-      decimal y0=Coord.Y;
+      double x0=Coord.X;
+      double y0=Coord.Y;
 
-      decimal x = 0;
-      decimal y = 0;
+      double x = 0;
+      double y = 0;
 
       while (x * x + y * y <= 2 * 2 && NumIters < MaxIters)
       {
-        decimal xtemp = x * x - y * y + x0;
+        double xtemp = x * x - y * y + x0;
         y = 2 * x * y + y0;
         x = xtemp;
         NumIters++;
@@ -170,8 +170,8 @@ namespace Mandelbrot
       {
         for (int j = 0; j < ImgHeight; j++)
         {
-          decimal x = MinX + (decimal) i * (MaxX - MinX) / ImgWidth;
-          decimal y = MaxY - (decimal) j * (MaxY - MinY) / ImgHeight;
+          double x = MinX + (double) i * (MaxX - MinX) / ImgWidth;
+          double y = MaxY - (double) j * (MaxY - MinY) / ImgHeight;
           NewCoord[i, j] = new XY(x,y);
         }
       }

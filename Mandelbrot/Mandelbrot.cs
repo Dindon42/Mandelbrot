@@ -17,6 +17,7 @@ namespace Mandelbrot
     int StartColSegments = 4;
     double ZoomFactor = 0.1;
     bool Grayscale = false;
+    bool RandomizeColors=false;
 
     
     Bitmap MyMandelbrot;
@@ -183,7 +184,6 @@ namespace Mandelbrot
     {
       Colors = new List<int[]>();
       int Max=255;
-      
 
       for (int i = 0; i < ColSegments; i++)
       {
@@ -210,6 +210,7 @@ namespace Mandelbrot
           }
         }
       }
+      if(RandomizeColors) Colors.Shuffle();
       MaxIter = Colors.Count();
     }
   }

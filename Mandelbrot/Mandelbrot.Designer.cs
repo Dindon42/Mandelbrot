@@ -37,9 +37,13 @@
       this.ColSegLabel = new System.Windows.Forms.Label();
       this.iZFLabel = new System.Windows.Forms.Label();
       this.UpdImg = new System.Windows.Forms.Button();
-      this.SmartZoom = new System.Windows.Forms.CheckBox();
+      this.iSmartZoom = new System.Windows.Forms.CheckBox();
       this.Reset = new System.Windows.Forms.Button();
-      this.RandCol = new System.Windows.Forms.CheckBox();
+      this.iRandCol = new System.Windows.Forms.CheckBox();
+      this.xpos = new System.Windows.Forms.Label();
+      this.ypos = new System.Windows.Forms.Label();
+      this.ColM = new System.Windows.Forms.Button();
+      this.ColP = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.PB)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.iZF)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.iColSeg)).BeginInit();
@@ -137,17 +141,17 @@
       this.UpdImg.UseVisualStyleBackColor = true;
       this.UpdImg.Click += new System.EventHandler(this.UpdImg_Click);
       // 
-      // SmartZoom
+      // iSmartZoom
       // 
-      this.SmartZoom.AutoSize = true;
-      this.SmartZoom.Checked = true;
-      this.SmartZoom.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.SmartZoom.Location = new System.Drawing.Point(13, 28);
-      this.SmartZoom.Name = "SmartZoom";
-      this.SmartZoom.Size = new System.Drawing.Size(80, 17);
-      this.SmartZoom.TabIndex = 11;
-      this.SmartZoom.Text = "SmartZoom";
-      this.SmartZoom.UseVisualStyleBackColor = true;
+      this.iSmartZoom.AutoSize = true;
+      this.iSmartZoom.Checked = true;
+      this.iSmartZoom.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.iSmartZoom.Location = new System.Drawing.Point(13, 28);
+      this.iSmartZoom.Name = "iSmartZoom";
+      this.iSmartZoom.Size = new System.Drawing.Size(80, 17);
+      this.iSmartZoom.TabIndex = 11;
+      this.iSmartZoom.Text = "SmartZoom";
+      this.iSmartZoom.UseVisualStyleBackColor = true;
       // 
       // Reset
       // 
@@ -160,27 +164,71 @@
       this.Reset.UseVisualStyleBackColor = true;
       this.Reset.Click += new System.EventHandler(this.Reset_Click);
       // 
-      // RandCol
+      // iRandCol
       // 
-      this.RandCol.AutoSize = true;
-      this.RandCol.Checked = true;
-      this.RandCol.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.RandCol.Location = new System.Drawing.Point(13, 51);
-      this.RandCol.Name = "RandCol";
-      this.RandCol.Size = new System.Drawing.Size(73, 17);
-      this.RandCol.TabIndex = 13;
-      this.RandCol.Text = "RandDistr";
-      this.RandCol.UseVisualStyleBackColor = true;
-      this.RandCol.CheckedChanged += new System.EventHandler(this.RandCol_CheckedChanged);
+      this.iRandCol.AutoSize = true;
+      this.iRandCol.Checked = true;
+      this.iRandCol.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.iRandCol.Location = new System.Drawing.Point(13, 51);
+      this.iRandCol.Name = "iRandCol";
+      this.iRandCol.Size = new System.Drawing.Size(73, 17);
+      this.iRandCol.TabIndex = 13;
+      this.iRandCol.Text = "RandDistr";
+      this.iRandCol.UseVisualStyleBackColor = true;
+      this.iRandCol.CheckedChanged += new System.EventHandler(this.RandCol_CheckedChanged);
+      // 
+      // xpos
+      // 
+      this.xpos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.xpos.AutoSize = true;
+      this.xpos.Location = new System.Drawing.Point(12, 697);
+      this.xpos.Name = "xpos";
+      this.xpos.Size = new System.Drawing.Size(66, 13);
+      this.xpos.TabIndex = 14;
+      this.xpos.Text = "xposlongpos";
+      // 
+      // ypos
+      // 
+      this.ypos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ypos.AutoSize = true;
+      this.ypos.Location = new System.Drawing.Point(12, 716);
+      this.ypos.Name = "ypos";
+      this.ypos.Size = new System.Drawing.Size(66, 13);
+      this.ypos.TabIndex = 15;
+      this.ypos.Text = "yposlongpos";
+      // 
+      // ColM
+      // 
+      this.ColM.Location = new System.Drawing.Point(103, 51);
+      this.ColM.Name = "ColM";
+      this.ColM.Size = new System.Drawing.Size(22, 23);
+      this.ColM.TabIndex = 16;
+      this.ColM.Text = "-";
+      this.ColM.UseVisualStyleBackColor = true;
+      this.ColM.Click += new System.EventHandler(this.ColM_Click);
+      // 
+      // ColP
+      // 
+      this.ColP.Location = new System.Drawing.Point(131, 51);
+      this.ColP.Name = "ColP";
+      this.ColP.Size = new System.Drawing.Size(22, 23);
+      this.ColP.TabIndex = 17;
+      this.ColP.Text = "+";
+      this.ColP.UseVisualStyleBackColor = true;
+      this.ColP.Click += new System.EventHandler(this.ColP_Click);
       // 
       // Mandelbrot
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1080, 701);
-      this.Controls.Add(this.RandCol);
+      this.ClientSize = new System.Drawing.Size(1080, 738);
+      this.Controls.Add(this.ColP);
+      this.Controls.Add(this.ColM);
+      this.Controls.Add(this.ypos);
+      this.Controls.Add(this.xpos);
+      this.Controls.Add(this.iRandCol);
       this.Controls.Add(this.Reset);
-      this.Controls.Add(this.SmartZoom);
+      this.Controls.Add(this.iSmartZoom);
       this.Controls.Add(this.UpdImg);
       this.Controls.Add(this.iZFLabel);
       this.Controls.Add(this.ColSegLabel);
@@ -211,9 +259,13 @@
     private System.Windows.Forms.Label ColSegLabel;
     private System.Windows.Forms.Label iZFLabel;
     private System.Windows.Forms.Button UpdImg;
-    private System.Windows.Forms.CheckBox SmartZoom;
+    private System.Windows.Forms.CheckBox iSmartZoom;
     private System.Windows.Forms.Button Reset;
-    private System.Windows.Forms.CheckBox RandCol;
+    private System.Windows.Forms.CheckBox iRandCol;
+    private System.Windows.Forms.Label xpos;
+    private System.Windows.Forms.Label ypos;
+    private System.Windows.Forms.Button ColM;
+    private System.Windows.Forms.Button ColP;
   }
 }
 

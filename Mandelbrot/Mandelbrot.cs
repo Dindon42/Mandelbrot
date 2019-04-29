@@ -18,6 +18,9 @@ namespace Mandelbrot
     bool RandColors = false;
     int ColSegments = 0;
     double ZoomFactor = 0;
+
+    int PrevW;
+    int PrevH;
     
     Bitmap MyMandelbrot;
     ushort ImgWidth;
@@ -39,10 +42,11 @@ namespace Mandelbrot
     public Mandelbrot()
     {
       Load += new EventHandler(Mandelbrot_Load);
-      ResizeEnd += new EventHandler(Mandelbrot_Resize);
-      
+
       InitializeComponent();
+      ResizeEnd += new EventHandler(Mandelbrot_Resize);
       PB.MouseClick += new MouseEventHandler(PB_MouseClick);
+      PB.MouseMove += new MouseEventHandler(PB_MouseMove);
     }
 
     void ReInitializeParams()
@@ -54,8 +58,8 @@ namespace Mandelbrot
       iColSeg.Value = 3;
       iZF.Value = 2;
       iGrayScale.Checked = false;
-      SmartZoom.Checked = true;
-      RandCol.Checked = false;
+      iSmartZoom.Checked = true;
+      iRandCol.Checked = false;
 
       UpdateParameters();
       UpdateImage();
@@ -67,7 +71,7 @@ namespace Mandelbrot
       ZoomFactor = 0.05* iZF.Value;
       Grayscale = iGrayScale.Checked;
       ColSegLabel.Text = iColSeg.Value.ToString();
-      RandColors = RandCol.Checked;
+      RandColors = iRandCol.Checked;
       iZFLabel.Text = ZoomFactor.ToString();
 
 
@@ -80,7 +84,10 @@ namespace Mandelbrot
     }
     void Mandelbrot_Resize(object sender, EventArgs e)
     {
+      if (PrevH == Height && PrevW == Width) return;
       UpdateImage();
+      PrevH = Height;
+      PrevW = Width;
     }
 
     void PB_MouseClick(object sender, MouseEventArgs e)
@@ -94,14 +101,14 @@ namespace Mandelbrot
         case MouseButtons.Right:
         {
           //Zoom Out
-          if(iColSeg.Value>iColSeg.Minimum && SmartZoom.Checked) iColSeg.Value--;
+          if (iSmartZoom.Checked) UpdateColSegScrollBar(false);
           ZoomOut = true;
           break;
         }
         case MouseButtons.Left:
         {
           //Zoom In.
-          if (iColSeg.Value < iColSeg.Maximum && SmartZoom.Checked) iColSeg.Value++;
+          if (iSmartZoom.Checked) UpdateColSegScrollBar(true);
           ZoomIn = true;
           break;
         }
@@ -114,9 +121,9 @@ namespace Mandelbrot
           return;
         }
       }
-      UpdateParameters();
       UpdateCanvas(XY, ZoomIn, ZoomOut);
     }
+
     void UpdateCanvas(XY NewCenter,bool ZoomIn, bool ZoomOut)
     {
       double ZF = ZoomIn ? ZoomFactor : ZoomOut? 1 / ZoomFactor: 1;
@@ -279,6 +286,37 @@ namespace Mandelbrot
 
     private void RandCol_CheckedChanged(object sender, EventArgs e)
     {
+      UpdateParameters();
+    }
+
+    void PB_MouseMove(object sender, MouseEventArgs e)
+    {
+      XY CursorXYPos = Coord[e.X, e.Y];
+
+      xpos.Text = "x: " + CursorXYPos.X;
+      ypos.Text = "y: " + CursorXYPos.Y;
+    }
+
+    private void ColM_Click(object sender, EventArgs e)
+    {
+      UpdateColSegScrollBar(false);
+    }
+
+    private void ColP_Click(object sender, EventArgs e)
+    {
+      UpdateColSegScrollBar(true);
+    }
+
+    void UpdateColSegScrollBar(bool Plus)
+    {
+      if(Plus)
+      {
+        if(iColSeg.Value < iColSeg.Maximum)  iColSeg.Value++;
+      }
+      else
+      {
+        if(iColSeg.Value > iColSeg.Minimum)  iColSeg.Value--;
+      }
       UpdateParameters();
     }
   }

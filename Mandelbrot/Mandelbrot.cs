@@ -15,6 +15,7 @@ namespace Mandelbrot
   {
     //Tunables
     bool Grayscale = false;
+    bool RandColors = false;
     int ColSegments = 0;
     double ZoomFactor = 0;
     
@@ -54,6 +55,7 @@ namespace Mandelbrot
       iZF.Value = 2;
       iGrayScale.Checked = false;
       SmartZoom.Checked = true;
+      RandCol.Checked = false;
 
       UpdateParameters();
       UpdateImage();
@@ -65,6 +67,7 @@ namespace Mandelbrot
       ZoomFactor = 0.05* iZF.Value;
       Grayscale = iGrayScale.Checked;
       ColSegLabel.Text = iColSeg.Value.ToString();
+      RandColors = RandCol.Checked;
       iZFLabel.Text = ZoomFactor.ToString();
 
 
@@ -206,12 +209,6 @@ namespace Mandelbrot
       return NewCoord;
     }
 
-    void RandomizeColors()
-    {
-      Colors.Shuffle();
-      UpdateImage();
-    }
-
     void BuildColorList()
     {
       Colors = new List<int[]>();
@@ -248,12 +245,10 @@ namespace Mandelbrot
         }
       }
       Colors = Colors.Select(x => x).Distinct().ToList();
-      MaxIter = Colors.Count();
-    }
 
-    private void RandClick(object sender, EventArgs e)
-    {
-      RandomizeColors();
+      if (RandColors) Colors.Shuffle();
+
+      MaxIter = Colors.Count();
     }
 
     private void iColSeg_Scroll(object sender, EventArgs e)
@@ -268,6 +263,7 @@ namespace Mandelbrot
 
     private void UpdImg_Click(object sender, EventArgs e)
     {
+      UpdateParameters();
       UpdateImage();
     }
 
@@ -276,15 +272,14 @@ namespace Mandelbrot
       UpdateParameters();
     }
 
-    private void NormColors(object sender, EventArgs e)
-    {
-      BuildColorList();
-      UpdateImage();
-    }
-
     private void Reset_Click(object sender, EventArgs e)
     {
       ReInitializeParams();
+    }
+
+    private void RandCol_CheckedChanged(object sender, EventArgs e)
+    {
+      UpdateParameters();
     }
   }
 }

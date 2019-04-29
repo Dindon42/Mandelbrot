@@ -34,13 +34,12 @@
       this.iColSeg = new System.Windows.Forms.TrackBar();
       this.label1 = new System.Windows.Forms.Label();
       this.label2 = new System.Windows.Forms.Label();
-      this.RandColors = new System.Windows.Forms.Button();
       this.ColSegLabel = new System.Windows.Forms.Label();
       this.iZFLabel = new System.Windows.Forms.Label();
       this.UpdImg = new System.Windows.Forms.Button();
-      this.button1 = new System.Windows.Forms.Button();
       this.SmartZoom = new System.Windows.Forms.CheckBox();
       this.Reset = new System.Windows.Forms.Button();
+      this.RandCol = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.PB)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.iZF)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.iColSeg)).BeginInit();
@@ -109,17 +108,6 @@
       this.label2.TabIndex = 5;
       this.label2.Text = "Colors:";
       // 
-      // RandColors
-      // 
-      this.RandColors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.RandColors.Location = new System.Drawing.Point(990, 5);
-      this.RandColors.Name = "RandColors";
-      this.RandColors.Size = new System.Drawing.Size(73, 32);
-      this.RandColors.TabIndex = 6;
-      this.RandColors.Text = "RandCol";
-      this.RandColors.UseVisualStyleBackColor = true;
-      this.RandColors.Click += new System.EventHandler(this.RandClick);
-      // 
       // ColSegLabel
       // 
       this.ColSegLabel.AutoSize = true;
@@ -141,24 +129,13 @@
       // UpdImg
       // 
       this.UpdImg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.UpdImg.Location = new System.Drawing.Point(898, 43);
+      this.UpdImg.Location = new System.Drawing.Point(977, 5);
       this.UpdImg.Name = "UpdImg";
       this.UpdImg.Size = new System.Drawing.Size(86, 32);
       this.UpdImg.TabIndex = 9;
       this.UpdImg.Text = "UpdImg";
       this.UpdImg.UseVisualStyleBackColor = true;
       this.UpdImg.Click += new System.EventHandler(this.UpdImg_Click);
-      // 
-      // button1
-      // 
-      this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.button1.Location = new System.Drawing.Point(898, 5);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(86, 32);
-      this.button1.TabIndex = 10;
-      this.button1.Text = "NormalColors";
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.NormColors);
       // 
       // SmartZoom
       // 
@@ -175,26 +152,38 @@
       // Reset
       // 
       this.Reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.Reset.Location = new System.Drawing.Point(990, 43);
+      this.Reset.Location = new System.Drawing.Point(977, 42);
       this.Reset.Name = "Reset";
-      this.Reset.Size = new System.Drawing.Size(73, 32);
+      this.Reset.Size = new System.Drawing.Size(86, 32);
       this.Reset.TabIndex = 12;
       this.Reset.Text = "Reset";
       this.Reset.UseVisualStyleBackColor = true;
       this.Reset.Click += new System.EventHandler(this.Reset_Click);
+      // 
+      // RandCol
+      // 
+      this.RandCol.AutoSize = true;
+      this.RandCol.Checked = true;
+      this.RandCol.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.RandCol.Location = new System.Drawing.Point(13, 51);
+      this.RandCol.Name = "RandCol";
+      this.RandCol.Size = new System.Drawing.Size(73, 17);
+      this.RandCol.TabIndex = 13;
+      this.RandCol.Text = "RandDistr";
+      this.RandCol.UseVisualStyleBackColor = true;
+      this.RandCol.CheckedChanged += new System.EventHandler(this.RandCol_CheckedChanged);
       // 
       // Mandelbrot
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1080, 701);
+      this.Controls.Add(this.RandCol);
       this.Controls.Add(this.Reset);
       this.Controls.Add(this.SmartZoom);
-      this.Controls.Add(this.button1);
       this.Controls.Add(this.UpdImg);
       this.Controls.Add(this.iZFLabel);
       this.Controls.Add(this.ColSegLabel);
-      this.Controls.Add(this.RandColors);
       this.Controls.Add(this.label2);
       this.Controls.Add(this.label1);
       this.Controls.Add(this.iColSeg);
@@ -219,13 +208,12 @@
     private System.Windows.Forms.TrackBar iColSeg;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Button RandColors;
     private System.Windows.Forms.Label ColSegLabel;
     private System.Windows.Forms.Label iZFLabel;
     private System.Windows.Forms.Button UpdImg;
-    private System.Windows.Forms.Button button1;
     private System.Windows.Forms.CheckBox SmartZoom;
     private System.Windows.Forms.Button Reset;
+    private System.Windows.Forms.CheckBox RandCol;
   }
 }
 

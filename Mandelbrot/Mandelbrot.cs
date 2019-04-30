@@ -23,8 +23,6 @@ namespace Mandelbrot
     int PrevH;
     
     Bitmap MyMandelbrot;
-    ushort ImgWidth;
-    ushort ImgHeight;
     //Starting values;
     double MinX;
     double MaxX;
@@ -146,8 +144,9 @@ namespace Mandelbrot
 
     Bitmap UpdatePixels()
     {
-      ImgWidth = (ushort) PB.Width;
-      ImgHeight = (ushort) PB.Height;
+      int ImgWidth = PB.Width;
+      int ImgHeight = PB.Height;
+
       Bitmap Pix = new Bitmap(ImgWidth, ImgHeight);
 
       int[,] Iterations = new int[ImgWidth, ImgHeight];
@@ -201,6 +200,9 @@ namespace Mandelbrot
 
     XY[,] UpdateCoord()
     {
+      int ImgWidth = PB.Width;
+      int ImgHeight = PB.Height;
+
       XY[,] NewCoord = new XY[ImgWidth, ImgHeight];
 
       for (int i = 0; i < ImgWidth; i++)
@@ -291,6 +293,8 @@ namespace Mandelbrot
 
     void PB_MouseMove(object sender, MouseEventArgs e)
     {
+      if (e.X >= Coord.GetLength(0) || e.Y >= Coord.GetLength(1)) return;
+
       XY CursorXYPos = Coord[e.X, e.Y];
 
       xpos.Text = "x: " + CursorXYPos.X;

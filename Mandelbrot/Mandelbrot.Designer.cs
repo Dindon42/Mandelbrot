@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mandelbrot));
       this.PB = new System.Windows.Forms.PictureBox();
       this.iGrayScale = new System.Windows.Forms.CheckBox();
       this.iZF = new System.Windows.Forms.TrackBar();
@@ -238,6 +239,7 @@
       this.Controls.Add(this.iZF);
       this.Controls.Add(this.iGrayScale);
       this.Controls.Add(this.PB);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "Mandelbrot";
       this.Text = "Mandelbrot";
       ((System.ComponentModel.ISupportInitialize)(this.PB)).EndInit();
